@@ -59,7 +59,9 @@ console.log(randomNumber);
 questionObjectArray[randomNumber].logQuestionToConsole();
 
 // display popup
-displayPopup('<p>Please enter the number next to the question in the console.<br>Any other number or no input will be considered a wrong answer.</p>', 'prompt');
+displayPopup("<p>Enter the number next to the question in the console.<br>" +
+             "Any other number or no input is a wrong answer.</p>",
+             "prompt");
 
 // add click event to the popup's OK
 document.getElementById('alert_box_OK_button').addEventListener("click", function() {
