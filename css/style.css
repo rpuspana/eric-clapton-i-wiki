@@ -1,0 +1,275 @@
+/*
+ * Game developer Radu Puspana
+ * Developed in August 2017
+ * Game version 1.0
+ */
+
+/*** Styles for index.html page ***/
+
+/* Font homemade-apple-regular - latin */
+@font-face {
+  font-family: 'Homemade Apple';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Homemade Apple'), local('HomemadeApple'),
+       url('../fonts/homemade-apple-v6-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/homemade-apple-v6-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/homemade-apple-v6-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/homemade-apple-v6-latin-regular.svg#HomemadeApple') format('svg'); /* Legacy iOS */
+}
+
+/* Font montserrat-regular - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'),
+       url('../fonts/montserrat-v10-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../fonts/montserrat-v10-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+
+body, html {
+  height: 100%;
+  background: #0c0c0c;
+
+}
+
+/*main div*/
+.main-div {
+    background: -webkit-linear-gradient(#0c0c0c, #FEAA57); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#0c0c0c, #FEAA57); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#0c0c0c, #FEAA57); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#0c0c0c, #FEAA57); /* Standard syntax (must be last) */
+/*    border: 1px solid red;*/
+    display: block;
+  position: relative;
+  margin: 0px auto;
+  height: auto;
+  width: 80%;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+/*  padding: 20px;*/
+}
+
+/* <div class="topContainer"> styles */
+.topContainer {
+    box-sizing: border-box;
+    width: 84%;
+    height: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    padding: 10px 23px;
+    color: #333;
+    margin: 10px auto;
+/*    border: 1px solid blue;*/
+}
+
+h2 {
+    margin: 0px;
+    font-family: 'Homemade Apple';
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    color: #E4D1A9;
+    font-size: 2.0em;
+}
+
+.topContainer p {
+    line-height: 1.6em;
+    margin: 10px auto;
+    color: #000;
+/*    text-shadow: 1px 1px 4px white;*/
+}
+
+/* div used to hold the form and the image*/
+/* div used to hold the submit and next buttons*/
+.container {
+  display: block;
+  position: relative;
+  margin: 10px auto;
+  height: auto;
+  width: 80%;
+  padding: 20px;
+/*     border: 1px solid green;*/
+}
+
+.left {
+    float: left;
+    max-width: 65%;
+}
+
+.right {
+    float: right;
+    max-width: 35%;
+}
+
+.right img {
+    max-width: 100%;
+    height: auto;
+    float: right;
+}
+
+.container:after {
+    content:"";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 480px) {
+    .left, .right {
+        float: none;
+        width: auto;
+    }
+}
+
+.container p {
+    color: #FFF;
+    display: block;
+    font-size: 1.3em;
+/*
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+*/
+    font-weight: bold;
+}
+
+/*footer div*/
+.footer {
+    margin: 10px auto;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.footer p {
+    text-align: center;
+    font-size: 0.70em;
+    color: #6d4a28;
+}
+
+.footer a {
+    color: #6d4a28;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.field {
+    width: 13%;
+    font-family: Montserrat;
+    font-size: 9pt;
+    padding-left: 3px;
+    font-weight: bold;
+    margin: 2%;
+    text-align: center;
+     border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+}
+
+/* Promopt window */
+
+#alertBox {
+    position: absolute;
+    height: 31%;
+    width: 56%;
+    top: 20%;
+    margin-left: 40%%;
+    font-size: 10pt;
+    visibility: hidden;
+}
+
+#alertBox_container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    color: #FAFAFA;
+    border: 1px solid #FAFAFA;
+
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+
+    -webkit-box-shadow: 0px 10px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 5px -1px rgba(0,0,0,0.75);
+
+}
+
+#alertBox_titlebar {
+    cursor: pointer;
+    width: 100%;
+    margin-top: 0.5%;
+}
+
+#alertBox_titlebar span {
+    position: relative;
+    float: left;
+    padding-left: 1%;
+}
+
+#alertBox_close {
+    position: relative;
+    float: right;
+
+    padding: 0.5% 2%;
+    margin-right: 1%;
+
+    font-size: 7pt;
+    font-family: 'Montserrat';
+    font-weight: bold;
+
+    color: #000;
+    border: 1px solid;
+    border-color: #FAFAFA;
+    background-color: #FAFAFA;
+
+     border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+}
+
+#alertBox_close:hover {
+    color: #FAFAFA;
+    border-color: #000;
+    background-color: #000;
+}
+
+#alertBox_text {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+#alertBox_text p {
+    font-size: 9pt;
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    color: #000;
+    font-family: "Montserrat";
+    font-size: 9pt;
+    height: 2%;
+    width: 14%;
+
+    border: 1px solid;
+    border-color: #FAFAFA;
+    background-color: #FAFAFA;
+
+     border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+}
+
+.button:hover {
+    color: #FAFAFA;
+    border-color: #000;
+    background-color: #000;
+}
