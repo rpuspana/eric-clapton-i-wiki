@@ -73,7 +73,8 @@ userAnswer = parsePopupInput(prompt("Enter the number next to the question in th
 //    document.getElementById("alertBox_container").style.visibility = "hidden";
 //});
 
-// if the user entered something in the popup
+// if the user entered something in the popup, check if the answer is correct
+// and display and appropiate message
 if (isNaN(userAnswer) === false) {
     questionObjectArray[randomNumber].checkAnswer(userAnswer);
     console.log("============================================");
