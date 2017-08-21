@@ -53,35 +53,9 @@ initializeGame();
 generateQuestions();
 console.info(questionObjectArray);
 
-// generate a random number between 0 and (questions.length - 1)
-var randomNumber = Math.floor(
-    Math.random() * questions.length);
-console.log(randomNumber);
+//for(int i = 1)
+displayQuestionAndScoreUserAnswer();
 
-// extract the question at id=randomNumner from the array and log it the console
-questionObjectArray[randomNumber].logQuestionToConsole();
-
-// display popup
-//displayPopup("<p>Enter the number next to the question in the console.<br>" +
-//             "Any other number or no input is a wrong answer.</p>",
-//             "prompt");
-userAnswer = parsePopupInput(prompt("Enter the number next to the question in the console." +
-       "\nAny other number or no input is a wrong answer."));
-
-// add click event to the popup's OK
-//document.getElementById("alert_box_OK_button").addEventListener("click", function () {
-//    userAnswer = parsePopupInput(document.getElementById('ptext').value);
-//    console.log(promptUserAnswer);
-//    document.getElementById("ptext").value = "";
-//    document.getElementById("alertBox_container").style.visibility = "hidden";
-//});
-
-// if the user entered something in the popup, check if the answer is correct
-// and display and appropiate message
-if (isNaN(userAnswer) === false) {
-    questionObjectArray[randomNumber].checkAnswer(userAnswer);
-    console.log("============================================");
-}
 
 
 
@@ -172,6 +146,38 @@ function generateQuestions() {
         questionObjectArray.push(
             new Question(questions[i], answers[i], correctAnswers[i])
         );
+    }
+}
+
+function displayQuestionAndScoreUserAnswer() {
+    // generate a random number between 0 and (questions.length - 1)
+    var randomNumber = Math.floor(
+        Math.random() * questions.length);
+    console.log(randomNumber);
+
+    // extract the question at id=randomNumner from the array and log it the console
+    questionObjectArray[randomNumber].logQuestionToConsole();
+
+    // display popup
+    //displayPopup("<p>Enter the number next to the question in the console.<br>" +
+    //             "Any other number or no input is a wrong answer.</p>",
+    //             "prompt");
+    userAnswer = parsePopupInput(prompt("Enter the number next to the question in the console." +
+           "\nAny other number or no input is a wrong answer."));
+
+    // add click event to the popup's OK
+    //document.getElementById("alert_box_OK_button").addEventListener("click", function () {
+    //    userAnswer = parsePopupInput(document.getElementById('ptext').value);
+    //    console.log(promptUserAnswer);
+    //    document.getElementById("ptext").value = "";
+    //    document.getElementById("alertBox_container").style.visibility = "hidden";
+    //});
+
+    // if the user entered something in the popup, check if the answer is correct
+    // and display and appropiate message
+    if (isNaN(userAnswer) === false) {
+        questionObjectArray[randomNumber].checkAnswer(userAnswer);
+        console.log("============================================");
     }
 }
 
