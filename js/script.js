@@ -149,14 +149,12 @@ function generateQuestions() {
     }
 }
 
-function displayQuestionAndScoreUserAnswer() {
-    // generate a random number between 0 and (questions.length - 1)
-    var randomNumber = Math.floor(
-        Math.random() * questions.length);
-    console.log(randomNumber);
+function displayQuestionAndScoreUserAnswer(questionNumber) {
+
+    console.log(questionNumber);
 
     // extract the question at id=randomNumner from the array and log it the console
-    questionObjectArray[randomNumber].logQuestionToConsole();
+    questionObjectArray[questionNumber].logQuestionToConsole();
 
     // display popup
     //displayPopup("<p>Enter the number next to the question in the console.<br>" +
