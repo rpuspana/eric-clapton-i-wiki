@@ -32,7 +32,7 @@ var Question;
 
 
 // hide the custom popup when it's X button is clicked
-document.getElementById("alertBox_close").addEventListener("click", function() {
+document.getElementById("alertBox_close").addEventListener("click", function () {
     document.getElementById("alertBox_container").style.visibility = "hidden";
 });
 
@@ -59,18 +59,25 @@ console.log(randomNumber);
 questionObjectArray[randomNumber].logQuestionToConsole();
 
 // display popup
-displayPopup("<p>Enter the number next to the question in the console.<br>" +
-             "Any other number or no input is a wrong answer.</p>",
-             "prompt");
+//displayPopup("<p>Enter the number next to the question in the console.<br>" +
+//             "Any other number or no input is a wrong answer.</p>",
+//             "prompt");
+userAnswer = parsePopupInput(prompt("Enter the number next to the question in the console." +
+       "\nAny other number or no input is a wrong answer."));
 
 // add click event to the popup's OK
-document.getElementById('alert_box_OK_button').addEventListener("click", function() {
-    userAnswer = pardocument.getElementById('ptext').value;
-    console.log(promptUserAnswer);
-    document.getElementById('ptext').value = "";
-    document.getElementById('alertBox_container').style.visibility = "hidden";
-});
+//document.getElementById("alert_box_OK_button").addEventListener("click", function () {
+//    userAnswer = parsePopupInput(document.getElementById('ptext').value);
+//    console.log(promptUserAnswer);
+//    document.getElementById("ptext").value = "";
+//    document.getElementById("alertBox_container").style.visibility = "hidden";
+//});
 
+// if the user entered something in the popup
+if (isNaN(userAnswer) === false) {
+    questionObjectArray[randomNumber].checkAnswer(userAnswer);
+    console.log("============================================");
+}
 
 
 
@@ -84,8 +91,13 @@ document.getElementById('alert_box_OK_button').addEventListener("click", functio
 // initialize game variables
 function initializeGame() {
 
+    // user answer default value
+    // from the value subtracted from the user 1 will be subtrarcted in order to match
+    // a value from correctAnswers array.
+    userAnswer = 4;
+
     // Question constructor
-    Question = function (questionText, answers, correctAnswer) {
+    Question = function(questionText, answers, correctAnswer) {
         this.questionText = questionText;
         this.answers = answers;
         this.correctAnswer = correctAnswer;
@@ -103,7 +115,7 @@ function initializeGame() {
     // see if the user answered correctly to a question by comparing his answer to
     // the object's correctAnswer property.
     // return true if this.correctAnswer and userAnswer string match
-    Question.prototype.isUserAnswerValid = function (userAnswer) {
+    Question.prototype.isUserAnswerValid = function(userAnswer) {
         if (this.correctAnswer === userAnswer) {
             return true;
         }
@@ -111,6 +123,15 @@ function initializeGame() {
             return false;
         }
     };
+
+    Question.prototype.checkAnswer = function(usrInput) {
+        if ((usrInput - 1) === this.correctAnswer) {
+            console.log("CORRECT!");
+        }
+        else {
+            console.log("WRONG! Please try again.");
+        }
+    }
 
     questions = [
         "How did Eric Clapton learn to play the guitar ?",
@@ -159,17 +180,17 @@ function displayPopup(text, type) {
 
     var button, popupColor;
 
-    if (type == "err") {
+    if (type === "err") {
         button = '<div id="alertBox_button_div"><input id="err_alert_box_button" class="button" type="button" value="OK" alt="OK"></div>';
         document.getElementById('alertBox_text').innerHTML = text + button;
         popupColor = "#D32C34";
     }
-    else if (type == "ok") {
+    else if (type === "ok") {
          button = '<div id="alertBox_button_div"><input id="ok_alert_box_button" class="button" type="button" value="OK" alt="OK"></div>';
         document.getElementById('alertBox_text').innerHTML = text + button;
         popupColor = "green";
     }
-    else if (type == "prompt") {
+    else if (type === "prompt") {
         button = '<div id="alertBox_button_div"><input id="alert_box_OK_button" class="button" type="button" value="OK" alt="OK"></div>';
         document.getElementById('alertBox_text').innerHTML = text + field + button;
         popupColor = "green";
@@ -184,22 +205,11 @@ function displayPopup(text, type) {
     document.getElementById('alertBox_container').style.visibility = "visible";
 }
 
-function isUseInputValid(userAnswer) {
-    console.log("isUseInputValid " + userAnswer);
-    switch (userAnswer) {
-        case "1":
-            return true;
-        case "2":
-            return true;
-        case "3":
-            return true;
-        default:
-            return false;
-    }
-}
-
-function testit() {
-
- displayPopup('Please enter the number next to the question in the console', 'err');
-
+// parse user input passed to the popup window
+// value  String  the value entered by the user in the popup
+function parsePopupInput(value) {
+  if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
+      return parseInt(value, 10);
+  }
+  return NaN;
 }
