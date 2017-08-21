@@ -4,6 +4,9 @@
  * Game version 1.0
  */
 
+
+(function() {
+
 // arary of Strings, the questions
 var questions;
 
@@ -214,3 +217,5 @@ function parsePopupInput(value) {
   }
   return NaN;
 }
+
+})();
