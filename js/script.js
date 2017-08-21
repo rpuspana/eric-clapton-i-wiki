@@ -27,17 +27,17 @@ var firstIdxQuestionsArray;
 // last index of the questions array
 var lastIdxQuestionsArray;
 
-// string entered by the user in custom popup
-var userAnswer;
-
 // Question constructor
 var Question;
 
+// number to use in loops
+var i;
+
 
 // hide the custom popup when it's X button is clicked
-document.getElementById("alertBox_close").addEventListener("click", function () {
-    document.getElementById("alertBox_container").style.visibility = "hidden";
-});
+//document.getElementById("alertBox_close").addEventListener("click", function () {
+//    document.getElementById("alertBox_container").style.visibility = "hidden";
+//});
 
 //for(var i = 0; i < questionObjectArray[randomNumber].answers.length; i++) {
 //    document.getElementById("promptAnswerOption" + (i + 1)).textContent =
@@ -53,26 +53,14 @@ initializeGame();
 generateQuestions();
 console.info(questionObjectArray);
 
-//for(int i = 1)
-displayQuestionAndScoreUserAnswer();
-
-
-
-
-
-
-
-
+// loop through the questions, display their text and evaluate user answer
+for(i = 0; i < questionObjectArray.length; i++)
+    displayQuestionAndScoreUserAnswer(i);
 
 
 
 // initialize game variables
 function initializeGame() {
-
-    // user answer default value
-    // from the value subtracted from the user 1 will be subtrarcted in order to match
-    // a value from correctAnswers array.
-    userAnswer = 4;
 
     // Question constructor
     Question = function(questionText, answers, correctAnswer) {
@@ -102,12 +90,20 @@ function initializeGame() {
         }
     };
 
-    Question.prototype.checkAnswer = function(usrInput) {
-        if ((usrInput - 1) === this.correctAnswer) {
-            console.log("CORRECT!");
+    // check if the user answer to the question the script freezes is the correct one
+    // usrInputPrompt  String  the input entered by the user in the prompt
+    Question.prototype.checkAnswer = function(usrInputPrompt) {
+        
+        // userAnswer will be the number entered by the user or NaN if a string was
+        // entered in the prompt or the Cancel button of the prompt was pressed or
+        // if the prompt was closed.
+        var userAnswer = parsePopupInput(usrInputPrompt);
+        
+        if ((isNaN(userAnswer) === false) && ((userAnswer - 1) === this.correctAnswer)) {
+            console.info("The answer %O is correct !", usrInputPrompt);
         }
         else {
-            console.log("WRONG! Please try again.");
+            console.info("The answer %O is wrong !", usrInputPrompt);
         }
     }
 
@@ -150,8 +146,9 @@ function generateQuestions() {
 }
 
 function displayQuestionAndScoreUserAnswer(questionNumber) {
-
-    console.log(questionNumber);
+    
+    // string entered by the user in custom popup
+    var userAnswerPrompt;
 
     // extract the question at id=randomNumner from the array and log it the console
     questionObjectArray[questionNumber].logQuestionToConsole();
@@ -160,8 +157,9 @@ function displayQuestionAndScoreUserAnswer(questionNumber) {
     //displayPopup("<p>Enter the number next to the question in the console.<br>" +
     //             "Any other number or no input is a wrong answer.</p>",
     //             "prompt");
-    userAnswer = parsePopupInput(prompt("Enter the number next to the question in the console." +
-           "\nAny other number or no input is a wrong answer."));
+    
+    userAnswerPrompt = prompt("Enter the number next to the question in the console." +
+           "\nAny other number, no input, or closing the window will count as a wrong answer.");
 
     // add click event to the popup's OK
     //document.getElementById("alert_box_OK_button").addEventListener("click", function () {
@@ -173,10 +171,8 @@ function displayQuestionAndScoreUserAnswer(questionNumber) {
 
     // if the user entered something in the popup, check if the answer is correct
     // and display and appropiate message
-    if (isNaN(userAnswer) === false) {
-        questionObjectArray[randomNumber].checkAnswer(userAnswer);
-        console.log("============================================");
-    }
+    questionObjectArray[questionNumber].checkAnswer(userAnswerPrompt);
+    console.log("============================================");
 }
 
 // create and display a custom popup window
