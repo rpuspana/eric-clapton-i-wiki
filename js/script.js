@@ -159,7 +159,8 @@ function displayQuestionAndScoreUserAnswer(questionNumber) {
     //             "prompt");
     
     userAnswerPrompt = prompt("Enter the number next to the question in the console." +
-           "\nAny other number, no input, or closing the window will count as a wrong answer.");
+           "\nAny other number, no input, or closing the window will count as a wrong answer." +
+           "\nType \"quit\" and press OK to quit the game at any moment.");
 
     // add click event to the popup's OK
     //document.getElementById("alert_box_OK_button").addEventListener("click", function () {
@@ -210,8 +211,9 @@ function displayPopup(text, type) {
 }
 
 // parse user input passed to the popup window
-// value  String  the value entered by the user in the popup
+// value  String  the value entered by the user in the prompt
 function parsePopupInput(value) {
+  value = value.trim();
   if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
       return parseInt(value, 10);
   }
