@@ -59,7 +59,10 @@ console.info(questionObjectArray);
 // loop through the questions, display their text and evaluate user answer
 for(i = 0; i < questionObjectArray.length; i++)
     if (gameOver === false) { displayQuestionAndScoreUserAnswer(i); }
-    else { console.log("GAME OVER"); }
+    else {
+        console.info("User entered \"quit\". The game is over.");
+        break;
+    }
 
 
 
