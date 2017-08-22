@@ -21,12 +21,6 @@
     // array of Question objects
     var questionObjectArray = [];
 
-    // the first index of the questions array
-    var firstIdxQuestionsArray;
-
-    // last index of the questions array
-    var lastIdxQuestionsArray;
-
     // Question constructor
     var Question;
 
@@ -68,8 +62,7 @@
         questionObjectArray[i].logQuestionToConsole();
 
         userAnswerPrompt = prompt("Enter the number next to the answer for each question in the browser's console." +
-               "\nAny other input, absence of input and clicking OK or closing the window will count as a wrong answer." +
-               "\nType \"q\" and press OK to quit the game at any moment.");
+                                  "\nType \"q\" and press OK to quit the game at any moment.");
 
         // if the user entered something in the popup, check if the answer is correct
         // and display and appropiate message
@@ -87,7 +80,7 @@
     // initialize game variables
     function initializeGame() {
 
-        // Question constructor
+        // Question constructor method
         Question = function(questionText, answers, correctAnswer) {
             this.questionText = questionText;
             this.answers = answers;
@@ -103,7 +96,7 @@
                         this.answers[2]);
         };
 
-        // see if the user answered correctly to a question by comparing his answer to
+        // Question method to see if the user answered correctly to a question by comparing his answer to
         // the object's correctAnswer property.
         // return true if this.correctAnswer and userAnswer string match
         Question.prototype.isUserAnswerValid = function(userAnswer) {
@@ -115,7 +108,7 @@
             }
         };
 
-        // check if the user answer to the question the script freezes is the correct one
+        // Question method check if the user answer to the question the script freezes is the correct one
         // usrInputPrompt  String  the input entered by the user in the prompt
         Question.prototype.checkAnswer = function(usrInputPrompt) {
 
@@ -123,13 +116,22 @@
             // entered in the prompt or the Cancel button of the prompt was pressed or
             // if the prompt was closed.
             var userAnswer = parsePopupInput(usrInputPrompt);
+            var userScore;
 
             if ((isNaN(userAnswer) === false) && ((userAnswer - 1) === this.correctAnswer)) {
                 console.info("The answer %O is correct !", usrInputPrompt);
+                userScore = keepUsrScore(true);
             }
             else {
                 console.info("The answer %O is wrong !", usrInputPrompt);
+                userScore = keepUsrScore(false);
             }
+            this.logUserScoreToConsole(userScore);
+        }
+
+        // Question method to print to the console the user score
+        Question.prototype.logUserScoreToConsole = function(score) {
+            console.info("Your current score is %d", score);
         }
 
         questions = [
@@ -152,14 +154,8 @@
         //                   =  correct answer to questions[i]
         correctAnswers = [2, 0, 2];
 
-        // based on the questions array length, establish the
-        // first and last index of this array
-        if (questions.length >= 1) {
-            firstIdxQuestionsArray = 0;
-            lastIdxQuestionsArray = questions.length - 1;
-        }
-
         // variable holding the function that increases the user's score if the answer was correct
+        // aka. the closure of keepUserScore()
         keepUsrScore = keepUserScore();
     }
 
@@ -187,6 +183,7 @@
         var userScore = 0;
 
         // this function increases the score if the user gave a correct answer and then return it
+        // this function returns the score the user has if the answer to a question was wrong
         // each correct answer is worth 1 point
         return function(correctAnswer) {
             if (correctAnswer) {
