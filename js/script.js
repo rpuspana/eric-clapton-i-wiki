@@ -33,8 +33,10 @@
     // number to use in loops
     var i;
 
-    // variable that indicates if the game is on or over
-    var gameOver;
+    // variable that indicates the user's score
+    // each correct answer accounts for 1 point
+    // no input or wrong answer accounts for 0 points
+    var keepUsrScore;
 
     // string entered by the user in custom popup
     var userAnswerPrompt;
@@ -67,16 +69,16 @@
 
         userAnswerPrompt = prompt("Enter the number next to the answer for each question in the browser's console." +
                "\nAny other input, absence of input and clicking OK or closing the window will count as a wrong answer." +
-               "\nType \"quit\" and press OK to quit the game at any moment.");
+               "\nType \"q\" and press OK to quit the game at any moment.");
 
         // if the user entered something in the popup, check if the answer is correct
         // and display and appropiate message
-        if (userAnswerPrompt !== "quit") {
+        if (userAnswerPrompt !== "q") {
             questionObjectArray[i].checkAnswer(userAnswerPrompt);
             console.log("============================================");
         }
         else {
-            console.info("User entered \"quit\". The game is over.");
+            console.info("User entered \"q\". The game is over.");
             break;
         }
     }
@@ -142,12 +144,12 @@
             ["Traffic", "The Yardbirds", "Cream"]
         ];
 
-    // if i is the index of this array:
-    // questions[i]      =  question
-    // answers[i]        =  answers of question[i]
-    // correctAnswers[i] =  index of correct answer in answers[i]
-    //                   =  answers[i][correctAnswers[i]] =
-    //                   =  correct answer to questions[i]
+        // if i is the index of this array:
+        // questions[i]      =  question
+        // answers[i]        =  answers of question[i]
+        // correctAnswers[i] =  index of correct answer in answers[i]
+        //                   =  answers[i][correctAnswers[i]] =
+        //                   =  correct answer to questions[i]
         correctAnswers = [2, 0, 2];
 
         // based on the questions array length, establish the
@@ -157,7 +159,8 @@
             lastIdxQuestionsArray = questions.length - 1;
         }
 
-        gameOver = false;
+        // variable holding the function that increases the user's score if the answer was correct
+        keepUsrScore = keepUserScore();
     }
 
     // create an array of Question objects
@@ -167,6 +170,29 @@
             questionObjectArray.push(
                 new Question(questions[i], answers[i], correctAnswers[i])
             );
+        }
+    }
+
+    // parse user input passed to the popup window
+    // value  String  the value entered by the user in the prompt
+    function parsePopupInput(value) {
+        if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
+          return parseInt(value, 10);
+        }
+        return NaN;
+    }
+
+    // keep and update user score
+    function keepUserScore() {
+        var userScore = 0;
+
+        // this function increases the score if the user gave a correct answer and then return it
+        // each correct answer is worth 1 point
+        return function(correctAnswer) {
+            if (correctAnswer) {
+                userScore++;
+            }
+            return userScore;
         }
     }
 
@@ -204,13 +230,6 @@
         document.getElementById('alertBox_container').style.visibility = "visible";
     }
 
-    // parse user input passed to the popup window
-    // value  String  the value entered by the user in the prompt
-    function parsePopupInput(value) {
-        if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
-          return parseInt(value, 10);
-        }
-        return NaN;
-    }
+
 
 })();
