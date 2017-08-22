@@ -230,11 +230,10 @@ function displayPopup(text, type) {
 // parse user input passed to the popup window
 // value  String  the value entered by the user in the prompt
 function parsePopupInput(value) {
-  value = value.trim();
-  if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
+    if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
       return parseInt(value, 10);
-  }
-  return NaN;
+    }
+    return NaN;
 }
 
 })();
