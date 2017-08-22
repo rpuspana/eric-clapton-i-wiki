@@ -65,8 +65,8 @@
         // extract the question at id=randomNumner from the array and log it the console
         questionObjectArray[i].logQuestionToConsole();
 
-        userAnswerPrompt = prompt("Enter the number next to the question in the console." +
-               "\nAny other number, no input, or closing the window will count as a wrong answer." +
+        userAnswerPrompt = prompt("Enter the number next to the answer for each question in the browser's console." +
+               "\nAny other input, absence of input and clicking OK or closing the window will count as a wrong answer." +
                "\nType \"quit\" and press OK to quit the game at any moment.");
 
         // if the user entered something in the popup, check if the answer is correct
