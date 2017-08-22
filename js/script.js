@@ -33,6 +33,9 @@ var Question;
 // number to use in loops
 var i;
 
+// variable that indicates if the game is on or over
+var gameOver;
+
 
 // hide the custom popup when it's X button is clicked
 //document.getElementById("alertBox_close").addEventListener("click", function () {
@@ -55,7 +58,9 @@ console.info(questionObjectArray);
 
 // loop through the questions, display their text and evaluate user answer
 for(i = 0; i < questionObjectArray.length; i++)
-    displayQuestionAndScoreUserAnswer(i);
+    if (gameOver === false) { displayQuestionAndScoreUserAnswer(i); }
+    else { console.log("GAME OVER"); }
+
 
 
 
@@ -133,6 +138,8 @@ function initializeGame() {
         firstIdxQuestionsArray = 0;
         lastIdxQuestionsArray = questions.length - 1;
     }
+
+    gameOver = false;
 }
 
 // create an array of Question objects
@@ -172,8 +179,15 @@ function displayQuestionAndScoreUserAnswer(questionNumber) {
 
     // if the user entered something in the popup, check if the answer is correct
     // and display and appropiate message
-    questionObjectArray[questionNumber].checkAnswer(userAnswerPrompt);
-    console.log("============================================");
+
+    if (userAnswerPrompt !== "quit") {
+        questionObjectArray[questionNumber].checkAnswer(userAnswerPrompt);
+        console.log("============================================");
+    }
+    else {
+        gameOver = true;
+    }
+
 }
 
 // create and display a custom popup window
