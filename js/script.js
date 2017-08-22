@@ -36,6 +36,9 @@
     // variable that indicates if the game is on or over
     var gameOver;
 
+    // string entered by the user in custom popup
+    var userAnswerPrompt;
+
 
     // hide the custom popup when it's X button is clicked
     //document.getElementById("alertBox_close").addEventListener("click", function () {
@@ -57,14 +60,26 @@
     console.info(questionObjectArray);
 
     // loop through the questions, display their text and evaluate user answer
-    for(i = 0; i < questionObjectArray.length; i++)
-        if (gameOver === false) { displayQuestionAndScoreUserAnswer(i); }
+    for(i = 0; i < questionObjectArray.length; i++) {
+
+        // extract the question at id=randomNumner from the array and log it the console
+        questionObjectArray[i].logQuestionToConsole();
+
+        userAnswerPrompt = prompt("Enter the number next to the question in the console." +
+               "\nAny other number, no input, or closing the window will count as a wrong answer." +
+               "\nType \"quit\" and press OK to quit the game at any moment.");
+
+        // if the user entered something in the popup, check if the answer is correct
+        // and display and appropiate message
+        if (userAnswerPrompt !== "quit") {
+            questionObjectArray[i].checkAnswer(userAnswerPrompt);
+            console.log("============================================");
+        }
         else {
             console.info("User entered \"quit\". The game is over.");
             break;
         }
-
-
+    }
 
 
     // initialize game variables
@@ -152,43 +167,6 @@
             questionObjectArray.push(
                 new Question(questions[i], answers[i], correctAnswers[i])
             );
-        }
-    }
-
-    function displayQuestionAndScoreUserAnswer(questionNumber) {
-
-        // string entered by the user in custom popup
-        var userAnswerPrompt;
-
-        // extract the question at id=randomNumner from the array and log it the console
-        questionObjectArray[questionNumber].logQuestionToConsole();
-
-        // display popup
-        //displayPopup("<p>Enter the number next to the question in the console.<br>" +
-        //             "Any other number or no input is a wrong answer.</p>",
-        //             "prompt");
-
-        userAnswerPrompt = prompt("Enter the number next to the question in the console." +
-               "\nAny other number, no input, or closing the window will count as a wrong answer." +
-               "\nType \"quit\" and press OK to quit the game at any moment.");
-
-        // add click event to the popup's OK
-        //document.getElementById("alert_box_OK_button").addEventListener("click", function () {
-        //    userAnswer = parsePopupInput(document.getElementById('ptext').value);
-        //    console.log(promptUserAnswer);
-        //    document.getElementById("ptext").value = "";
-        //    document.getElementById("alertBox_container").style.visibility = "hidden";
-        //});
-
-        // if the user entered something in the popup, check if the answer is correct
-        // and display and appropiate message
-
-        if (userAnswerPrompt !== "quit") {
-            questionObjectArray[questionNumber].checkAnswer(userAnswerPrompt);
-            console.log("============================================");
-        }
-        else {
-            gameOver = true;
         }
     }
 
