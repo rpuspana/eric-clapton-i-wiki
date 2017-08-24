@@ -49,8 +49,18 @@
 
     document.getElementById("start-game-button").addEventListener("click", function(){
 
-        // string entered by the user in custom popup
+        // string entered by the user in the prompt window
         var userAnswerPrompt;
+
+        // insert the word "point" or "points" in the user score message,
+        // based on the user's score
+        var userPointsMsg;
+
+        // insert the word "point" or "points" in the user score message,
+        // based on the number of questions in the questionObjectArray
+        // num of questions = max number of poits the user can score
+        var totalPointsMsg;
+
 
         // free the memoty allocated in the last played game
         freeMemoryFromLastGame();
@@ -66,7 +76,7 @@
         for(i = 0; i < questionObjectArray.length; i++) {
 
             // extract the question at id=randomNumner from the array and log it the console
-            questionObjectArray[i].logQuestionToConsole();
+            questionObjectArray[i].logQuestionToConsole(i + 1);
 
             userAnswerPrompt = prompt("Enter the number next to the answer for each question in the browser's console." +
                                       "\nType \"q\" and press OK to quit the game at any moment.");
@@ -75,15 +85,17 @@
             // and display and appropiate message
             if (userAnswerPrompt !== "q") {
                 questionObjectArray[i].checkAnswer(userAnswerPrompt);
-                console.log("============================================");
+                console.log(" ");
             }
             else {
                 console.info("User entered \"q\".");
                 break;
             }
         }
+        userPointsMsg = (userScore === 1) ? "point" : "points";
+        totalPointsMsg = (questionObjectArray.length === 1) ? "point" : "points";
 
-        console.info("Your scored %d points from a maximum of %d points.", userScore, questionObjectArray.length);
+        console.info("Your scored %d %s from a maximum of %d %s.", userScore, userPointsMsg, questionObjectArray.length, totalPointsMsg);
         console.info("*** GAME OVER ***");
     });
 
@@ -109,8 +121,9 @@
         };
 
         // Question method to log the question to the console
-        Question.prototype.logQuestionToConsole = function() {
-            console.log("%s\n1. %s\n2. %s\n3. %s",
+        Question.prototype.logQuestionToConsole = function(questionNumber) {
+            console.log("Question %d. %s\n1. %s\n2. %s\n3. %s",
+                        questionNumber,
                         this.questionText,
                         this.answers[0],
                         this.answers[1],
