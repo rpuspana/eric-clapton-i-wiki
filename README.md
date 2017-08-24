@@ -2,6 +2,9 @@
 
 A beautiful trivia game about Eric Clapton's life and music.
 
+### Project status
+Under construction
+
 ### Technologies used
 1. JavaScript ECMAScript 2015
 2. HTML 5
