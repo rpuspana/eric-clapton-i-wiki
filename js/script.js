@@ -32,8 +32,8 @@
     // no input or wrong answer accounts for 0 points
     var keepUsrScore;
 
-    // string entered by the user in custom popup
-    var userAnswerPrompt;
+    // score of the user
+    var userScore;
 
 
     // hide the custom popup when it's X button is clicked
@@ -47,38 +47,59 @@
         //    console.log("  %d. %s", i, questionObjectArray[randomNumber].answers[i]);
     //}
 
+    document.getElementById("start-game-button").addEventListener("click", function(){
 
-    // set game variable
-    initializeGame();
+        // string entered by the user in custom popup
+        var userAnswerPrompt;
 
-    // create an array of Question objects
-    generateQuestions();
-    console.info(questionObjectArray);
+        // free the memoty allocated in the last played game
+        freeMemoryFromLastGame();
 
-    // loop through the questions, display their text and evaluate user answer
-    for(i = 0; i < questionObjectArray.length; i++) {
+        // start a new game and initialise game variables
+        initializeGame();
 
-        // extract the question at id=randomNumner from the array and log it the console
-        questionObjectArray[i].logQuestionToConsole();
+        // create an array of Question objects
+        generateQuestions();
+        console.info(questionObjectArray);
 
-        userAnswerPrompt = prompt("Enter the number next to the answer for each question in the browser's console." +
-                                  "\nType \"q\" and press OK to quit the game at any moment.");
+        // loop through the questions, display their text and evaluate user answer
+        for(i = 0; i < questionObjectArray.length; i++) {
 
-        // if the user entered something in the popup, check if the answer is correct
-        // and display and appropiate message
-        if (userAnswerPrompt !== "q") {
-            questionObjectArray[i].checkAnswer(userAnswerPrompt);
-            console.log("============================================");
+            // extract the question at id=randomNumner from the array and log it the console
+            questionObjectArray[i].logQuestionToConsole();
+
+            userAnswerPrompt = prompt("Enter the number next to the answer for each question in the browser's console." +
+                                      "\nType \"q\" and press OK to quit the game at any moment.");
+
+            // if the user entered something in the popup, check if the answer is correct
+            // and display and appropiate message
+            if (userAnswerPrompt !== "q") {
+                questionObjectArray[i].checkAnswer(userAnswerPrompt);
+                console.log("============================================");
+            }
+            else {
+                console.info("User entered \"q\".");
+                break;
+            }
         }
-        else {
-            console.info("User entered \"q\". The game is over.");
-            break;
-        }
+
+        console.info("Your scored %d points from a maximum of %d points.", userScore, questionObjectArray.length);
+        console.info("*** GAME OVER ***");
+    });
+
+    // set objects to null to free memory allocated in the last game
+    function freeMemoryFromLastGame() {
+        questionObjectArray = null;
+        questions = null;
+        answers = null;
+        correctAnswers = null;
+        keepUsrScore = null;
     }
-
 
     // initialize game variables
     function initializeGame() {
+
+        console.info("*** START NEW GAME ***");
 
         // Question constructor method
         Question = function(questionText, answers, correctAnswer) {
@@ -116,7 +137,6 @@
             // entered in the prompt or the Cancel button of the prompt was pressed or
             // if the prompt was closed.
             var userAnswer = parsePopupInput(usrInputPrompt);
-            var userScore;
 
             if ((isNaN(userAnswer) === false) && ((userAnswer - 1) === this.correctAnswer)) {
                 console.info("The answer %O is correct !", usrInputPrompt);
@@ -131,7 +151,7 @@
 
         // Question method to print to the console the user score
         Question.prototype.logUserScoreToConsole = function(score) {
-            console.info("Your current score is %d", score);
+            console.info("Your total score is %d", score);
         }
 
         questions = [
@@ -157,6 +177,9 @@
         // variable holding the function that increases the user's score if the answer was correct
         // aka. the closure of keepUserScore()
         keepUsrScore = keepUserScore();
+
+        // reset questionObjectArray to an empty array so that the new Question instances can be inside
+        questionObjectArray = [];
     }
 
     // create an array of Question objects
