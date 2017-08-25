@@ -1,0 +1,27 @@
+Eric Clapton interactive wikipedia 1.0
+
+# Function constructor called Question to describe a question. A question should include:
+a) question itself
+b) the answers from which the player can choose the correct one
+c) correct answer
+
+# Store Question instances inside an array
+
+# Loop through the question array and log it on the console, together with the possible answers.
+   Each answer has a number 1, 2, or 3
+
+# Use the 'prompt' function to ask the user for the correct answer. 
+   The user should input the number of the correct answer
+
+# Check if the answer is correct and print it to the console whether the answer is correct ot nor - create a Question method
+
+# After you display the result, display the next random question, so that the game never ends.
+   Include the option to quit the game if the user writes 'q' instead of the answer. In this case, break from the question loop
+
+# Track the user's score. So each time an answer is correct, add 1 point to the score.
+
+# Display the score in the console - create a Question method
+
+# Display the game's rules as a modal window by clicking a link-like text
+
+# Display the instructions on how to access the browser's console by clicking a link-like text
