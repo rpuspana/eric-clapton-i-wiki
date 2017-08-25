@@ -99,7 +99,7 @@ document.getElementById("start-game-button").addEventListener("click", function(
         // extract the question at id=randomNumner from the array and log it the console
         questionObjectArray[i].logQuestionToConsole(i + 1);
 
-        userAnswerPrompt = prompt("Enter the number next to the answer for each question in the browser's console." +
+        userAnswerPrompt = prompt("Enter the number next to the answer for Question " + (i + 1)+ " displayed in the browser's console." +
                                   "Type \"q\" and press OK to quit the game at any moment.");
 
         // if the user entered something in the popup, check if the answer is correct
