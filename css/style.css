@@ -30,9 +30,8 @@
 
 
 body, html {
-  height: 100%;
-  background: #0c0c0c;
-
+    height: 100%;
+    background: #0c0c0c;
 }
 
 /*main div*/
@@ -41,16 +40,15 @@ body, html {
     background: -o-linear-gradient(#0c0c0c, #FEAA57); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#0c0c0c, #FEAA57); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#0c0c0c, #FEAA57); /* Standard syntax (must be last) */
-/*    border: 1px solid red;*/
     display: block;
-  position: relative;
-  margin: 0px auto;
-  height: auto;
-  width: 80%;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-/*  padding: 20px;*/
+    position: relative;
+    margin: 0px auto;
+    height: auto;
+    width: 80%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+/*  border: 1px solid red;*/
 }
 
 /* <div class="topContainer"> styles */
@@ -82,7 +80,6 @@ h2 {
     line-height: 1.6em;
     margin: 10px auto;
     color: #000;
-/*    text-shadow: 1px 1px 4px white;*/
 }
 
 /* div used to hold the form and the image*/
@@ -96,6 +93,11 @@ h2 {
   padding: 20px;
 /*     border: 1px solid green;*/
 }
+
+.container p:first-of-type {
+  margin-top: 0;
+}
+
 
 .left {
     float: left;
@@ -130,11 +132,18 @@ h2 {
     color: #FFF;
     display: block;
     font-size: 1.3em;
-/*
-    margin-top: 0px!important;
-    margin-bottom: 0px!important;
-*/
     font-weight: bold;
+}
+
+.info-modal-window {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    color: #FFF;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 /*footer div*/
@@ -174,10 +183,10 @@ h2 {
 
 #alertBox {
     position: absolute;
-    height: 31%;
-    width: 56%;
+    height: 82%;
+    width: 50%;
     top: 20%;
-    margin-left: 40%;
+    margin-left: 20%;
     font-size: 10pt;
     visibility: hidden;
 }
@@ -244,11 +253,11 @@ h2 {
     width: 100%;
     height: auto;
     text-align: center;
+    top: 15%;
 }
 
 #alertBox_text p {
-    font-size: 9pt;
-    margin: 0;
+    font-size: 10pt;
     padding: 0;
 }
 
