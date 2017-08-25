@@ -58,7 +58,7 @@ document.getElementById("alertBox_close").addEventListener("click", function () 
 document.getElementById("game-rules-popup").addEventListener("click", function () {
 
     // HTML to replace the content(if any) of the alertBox_text div
-    var modalWindowInnerHTML = "<p>Game Rules</p><p>1. Answer each question by entering the number next to a question's answer in the browser's prompt window and clicking 'OK'.<br><br>2. Clicking the 'Cancel' button in the browser's prompt window counts as wrong answer.<br><br>3. For each question answered correctly you will get 1 point.<br><br>4. The goal of the game is to score as many points as you can !</p>"
+    var modalWindowInnerHTML = "<p>Game Rules</p><p>1. Answer each question from the browser's console by entering the number on the left of the question's answer and clicking 'OK'.<br><br>2. Clicking the 'Cancel' button in the browser's prompt window counts as wrong answer.<br><br>3. For each question answered correctly you will get 1 point.<br><br>4. The goal of the game is to score as many points as you can !</p>"
 
      // display custom modal window with this text, type "info" and with 70% height
     displayPopup(modalWindowInnerHTML, "info", "70%");
@@ -99,7 +99,7 @@ document.getElementById("start-game-button").addEventListener("click", function(
         // extract the question at id=randomNumner from the array and log it the console
         questionObjectArray[i].logQuestionToConsole(i + 1);
 
-        userAnswerPrompt = prompt("Enter the number next to the answer for Question " + (i + 1)+ " displayed in the browser's console." +
+        userAnswerPrompt = prompt("Anser Question " + (i + 1) + " by entering just the number on the left of it's available answers. " +
                                   "Type \"q\" and press OK to quit the game at any moment.");
 
         // if the user entered something in the popup, check if the answer is correct
@@ -143,7 +143,7 @@ function initializeGame() {
 
     // Question method to log the question to the console
     Question.prototype.logQuestionToConsole = function(questionNumber) {
-        console.log("Question %d. %s\n1. %s\n2. %s\n3. %s",
+        console.log("Question %d. %s\n1 %s\n2 %s\n3 %s",
                     questionNumber,
                     this.questionText,
                     this.answers[0],
