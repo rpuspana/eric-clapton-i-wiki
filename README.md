@@ -27,7 +27,7 @@ A beautiful single player trivia game about Eric Clapton's life and music.
 ### Required game settings
 1. A single 10.4" screen or bigger and a screen resolution of at least 800x600.
 
-2. Internet connection (enables game to display image buttons)
+2. Internet connection (Redirect player to the developer's/contributors' web pages by clicking the game's footer links)
 
 3. The browser's JavaScript setting turned on. We need this setting in order for the game to generate the questions, display the prompt so that the player can answer the question, calculate the player's score and use "q" to quit the game.
 Go to your browser settings and turn on the "allow JavaScript to run on all websites" setting.
