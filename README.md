@@ -2,14 +2,6 @@
 
 A beautiful single player trivia game about Eric Clapton's life and music.
 
-### Download and start the game
-1. Clone or download the game using the "Clone or Download button"
-2. If downloaded, you will find an archive who's name will contain the words "Dice Battle". This archive contains the game.
-3. Extract the archive
-4. Go to the folder extracted from the archive, and open index.html in Chrome, Firefox, Internet Explorer or Microsoft Edge
-   **Note 1 :** In case you didn't alter Internet Explorer 11's default settings, when you open the game or it's menu, click on "Allow blocked content" button in the dialogue window that appears at the bottom of the web page, so the game can work.
-   **Note 2 :** Please see which versions of these browsers the game runs on, [by going to the "Designed for" section.](#designed-for)
-
 ### Game features
 1. Comptatible with Google Chrome, Mozilla Firefox, Internet Explorer, Microsoft Edge
 1. Cross browser compatible (Google Chrome, Mozilla Firefox, Internet Explorer, Microsoft Edge)
@@ -20,7 +12,7 @@ A beautiful single player trivia game about Eric Clapton's life and music.
 6. Beautiful graphics
 
 ### Technologies used
-1. JavaScript ECMAScript 2015
+1. JavaScript ES 5
 2. HTML 5
 3. CSS 3
 
